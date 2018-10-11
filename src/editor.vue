@@ -81,12 +81,12 @@
 
           // Instance
           this.quill = new Quill(this.$refs.editor, this._options)
-          
+
           this.quill.enable(false)
 
           // Set editor content
           if (this.value || this.content) {
-            this.quill.pasteHTML(this.value || this.content)
+            this.setContents(this.value || this.content)
           }
 
           // Disabled editor
@@ -117,30 +117,30 @@
           // Emit ready event
           this.$emit('ready', this.quill)
         }
+      },
+      setContents(val) {
+        const delta = this.quill.clipboard.convert(val);
+        this.quill.setContents(delta);
+      },
+      watchContent(newVal) {
+        if (this.quill) {
+          if (newVal && newVal !== this._content) {
+            this._content = newVal
+            this.setContents(newVal)
+          } else if(!newVal) {
+            this.quill.setText('')
+          }
+        }
       }
     },
     watch: {
       // Watch content change
       content(newVal, oldVal) {
-        if (this.quill) {
-          if (newVal && newVal !== this._content) {
-            this._content = newVal
-            this.quill.pasteHTML(newVal)
-          } else if(!newVal) {
-            this.quill.setText('')
-          }
-        }
+          this.watchContent(newVal)
       },
       // Watch content change
       value(newVal, oldVal) {
-        if (this.quill) {
-          if (newVal && newVal !== this._content) {
-            this._content = newVal
-            this.quill.pasteHTML(newVal)
-          } else if(!newVal) {
-            this.quill.setText('')
-          }
-        }
+          this.watchContent(newVal)
       },
       // Watch disabled change
       disabled(newVal, oldVal) {

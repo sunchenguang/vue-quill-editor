@@ -1,5 +1,8 @@
 
 ## CHANGELOG
+### v3.1.0 [2018-10-12]
+1. fix bug: pasteHTML method cause focus and browser scroll
+[PR #263](https://github.com/surmon-china/vue-quill-editor/pull/263)
 
 ### v3.0.6
 

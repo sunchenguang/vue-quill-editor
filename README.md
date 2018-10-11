@@ -16,6 +16,11 @@
 
 基于 Quill、适用于 Vue 的富文本编辑器，支持服务端渲染和单页应用。
 
+## fork原仓库
+改动请见![CHANGELOG](https://github.com/sunchenguang/vue-quill-editor/blob/master/CHANGELOG.md)
+
+- 修bug
+- 新特性
 
 ## Example
 
@@ -116,13 +121,13 @@ Quill.register('modules/yourQuillModule', yourQuillModule)
 <!-- You can custom the "myQuillEditor" name used to find the quill instance in current component -->
 <template>
   <!-- bidirectional data binding（双向数据绑定） -->
-  <div class="quill-editor" 
+  <div class="quill-editor"
        v-model="content"
        v-quill:myQuillEditor="editorOption">
   </div>
 
   <!-- Or manually control the data synchronization（手动控制数据流）  -->
-  <div class="quill-editor" 
+  <div class="quill-editor"
        :content="content"
        @change="onEditorChange($event)"
        v-quill:myQuillEditor="editorOption">
@@ -178,7 +183,7 @@ Quill.register('modules/yourQuillModule', yourQuillModule)
   import Quill from 'quill'
   import { someModule } from '../yourModulePath/someQuillModule.js'
   Quill.register('modules/someModule', someModule)
-  
+
   export default {
     data () {
       return {
